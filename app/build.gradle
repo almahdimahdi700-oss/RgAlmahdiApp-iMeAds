@@ -1,23 +1,38 @@
-plugins { id 'com.android.application' }
+plugins {
+    id 'com.android.application' version '8.1.0'
+    id 'org.jetbrains.kotlin.android' version '1.8.20' apply false
+}
+
 android {
     namespace 'com.rgalmahdi.app'
     compileSdk 34
+
     defaultConfig {
         applicationId "com.rgalmahdi.app"
         minSdk 21
         targetSdk 34
-        versionCode 4
-        versionName "4.0-iMeAds-StartIO-204445944"
+        versionCode 8
+        versionName "8.0-iMeAds-StartIO"
     }
-    buildTypes { release { minifyEnabled false } }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
 dependencies {
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'com.start.io:mobile-sdk:6.13.0'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.webkit:webkit:1.6.0'
+    implementation 'com.startapp:inapp-sdk:4.11.0'
 }
