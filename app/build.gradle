@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application' version '8.1.0'
-    id 'org.jetbrains.kotlin.android' version '1.8.20' apply false
 }
 
 android {
@@ -12,16 +11,12 @@ android {
         minSdk 21
         targetSdk 34
         versionCode 8
-        versionName "8.0-iMeAds-StartIO"
+        versionName "8.0-iMeAds-StartIO-Fixed"
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
-        }
-        debug {
-            minifyEnabled false
-        }
+        release { minifyEnabled false }
+        debug { minifyEnabled false }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,10 +24,18 @@ android {
     }
 }
 
+configurations.all {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+}
+
 dependencies {
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.webkit:webkit:1.6.0'
-    implementation 'com.startapp:inapp-sdk:4.11.0'
+    implementation('com.startapp:inapp-sdk:4.11.0') {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+    }
 }
