@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!-- أزرار برو ماكس تحت بعض - ملونة -->
+        <!-- أزرار برو ماكس - بدون مكتبات - مستحيل تنهار -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,34 +23,34 @@
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <Button
                 android:id="@+id/btnShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:layout_marginBottom="12dp"
-                android:contentDescription="مشاركة"
-                app:srcCompat="@android:drawable/ic_menu_share"
-                app:tint="@android:color/white"
-                android:backgroundTint="#2E7D32" />
+                android:backgroundTint="#2E7D32"
+                android:text="⤴"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <Button
                 android:id="@+id/btnEye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:layout_marginBottom="12dp"
-                android:contentDescription="حماية العين"
-                app:srcCompat="@android:drawable/ic_menu_view"
-                app:tint="@android:color/white"
-                android:backgroundTint="#0288D1" />
+                android:backgroundTint="#0288D1"
+                android:text="👁"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <Button
                 android:id="@+id/btnTTS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="قارئ صوتي"
-                app:srcCompat="@android:drawable/ic_btn_speak_now"
-                app:tint="@android:color/black"
-                android:backgroundTint="#FFB300" />
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:backgroundTint="#FFB300"
+                android:text="🔊"
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
