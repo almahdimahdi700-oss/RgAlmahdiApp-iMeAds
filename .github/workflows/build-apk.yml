@@ -1,4 +1,4 @@
-name: Build APK - iMeAds + Start.io
+name: Build APK - Rq AlMahdi
 
 on:
   push:
@@ -16,14 +16,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           
-      - name: Setup Gradle
+      - name: Setup Gradle 8.1.1
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.1.1'
         
       - name: Build Debug APK
-        run: gradle assembleDebug
+        run: gradle assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: RgAlmahdi-iMe-StartIO-APK
+          name: Rq-AlMahdi-APK-Final
           path: app/build/outputs/apk/debug/app-debug.apk
