@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipeRefreshLayout" android:layout_width="match_parent" android:layout_height="match_parent">
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
-        <ProgressBar android:id="@+id/progressBar" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="4dp" android:layout_alignParentTop="true" />
-        <WebView android:id="@+id/webView" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/progressBar" />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton android:id="@+id/fabShare" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" android:layout_margin="16dp" android:src="@android:drawable/ic_menu_share" />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton android:id="@+id/fabNightMode" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentStart="true" android:layout_margin="16dp" android:src="@android:drawable/ic_menu_day" />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton android:id="@+id/fabTTS" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_margin="16dp" android:src="@android:drawable/ic_btn_speak_now" />
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBar" />
+
+        <LinearLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:background="#FFFFFF">
+
+            <Button
+                android:id="@+id/btnShare"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="مشاركة" />
+
+            <Button
+                android:id="@+id/btnEye"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="👁️" />
+
+        </LinearLayout>
+
     </RelativeLayout>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
