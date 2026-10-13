@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private StartAppAd startAppAd;
     private int actionCount = 0;
-    public static final String SITE_URL = "https://rg-almahdi.ahmed-mahdi.com/";
+    public static final String SITE_URL = "https://rgalmahdi.blogspot.com/";
     public static final String IMEADS_PUB = "pub_X_V2BG-WWEDsbgkBc8qHng";
     private TextToSpeech textToSpeech;
 
