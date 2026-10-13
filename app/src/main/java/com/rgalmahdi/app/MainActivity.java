@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StartAppSDK.init(this, "204445944", false);
+        StartAppSDK.init(this, "209205885", false);
         StartAppSDK.setTestAdsEnabled(false);
         StartAppAd.disableSplash();
         startAppAd = new StartAppAd(this);
