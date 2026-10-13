@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,40 +12,47 @@
         <WebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bottomBar" />
+            android:layout_height="match_parent" />
 
+        <!-- أزرار برو ماكس تحت بعض - ملونة -->
         <LinearLayout
-            android:id="@+id/bottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:background="#FFFFFF">
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
 
-            <Button
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnShare"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="مشاركة" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:contentDescription="مشاركة"
+                app:srcCompat="@android:drawable/ic_menu_share"
+                app:tint="@android:color/white"
+                android:backgroundTint="#2E7D32" />
 
-            <Button
-                android:id="@+id/btnTTS"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="🔊" />
-
-            <Button
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnEye"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="👁️" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:contentDescription="حماية العين"
+                app:srcCompat="@android:drawable/ic_menu_view"
+                app:tint="@android:color/white"
+                android:backgroundTint="#0288D1" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnTTS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="قارئ صوتي"
+                app:srcCompat="@android:drawable/ic_btn_speak_now"
+                app:tint="@android:color/black"
+                android:backgroundTint="#FFB300" />
 
         </LinearLayout>
 
     </RelativeLayout>
-
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
