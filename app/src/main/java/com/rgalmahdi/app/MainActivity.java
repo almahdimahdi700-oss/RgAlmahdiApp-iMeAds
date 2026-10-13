@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             
             new AlertDialog.Builder(this)
                 .setTitle("رق المهدي برو ماكس")
-                .setMessage("هل تريد الخروج فعلاً؟\nاذكر الله 🙏")
+                .setMessage("هل تريد الخروج فعلاً؟\n")
                 .setPositiveButton("خروج", (d, w) -> {
                     tryShowAdThen(() -> finishAffinity());
                 })
