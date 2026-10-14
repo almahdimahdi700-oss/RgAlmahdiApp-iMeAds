@@ -1,58 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipeRefresh"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
 
-    <RelativeLayout
+    <!-- ===== بانر StartApp ثابت فوق - يظهر دائماً حتى لو المدونة ما اشتغلت ===== -->
+    <com.startapp.sdk.ads.banner.Banner
+        android:id="@+id/startAppBanner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#FFFFFF" />
 
-        <WebView
-            android:id="@+id/webview"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <!-- أزرار برو ماكس - بدون مكتبات - مستحيل تنهار -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-            <Button
-                android:id="@+id/btnShare"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#2E7D32"
-                android:text="⤴"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+            <!-- ===== أزرار برو ماكس الذهبية - تحت بعض - ملونة ===== -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnEye"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="#0288D1"
-                android:text="👁"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                <!-- زر المشاركة أخضر -->
+                <Button
+                    android:id="@+id/btnShare"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#2E7D32"
+                    android:text="⤴"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:elevation="6dp" />
 
-            <Button
-                android:id="@+id/btnTTS"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:backgroundTint="#FFB300"
-                android:text="🔊"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                <!-- زر العين أزرق -->
+                <Button
+                    android:id="@+id/btnEye"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#0288D1"
+                    android:text="👁"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:elevation="6dp" />
 
-        </LinearLayout>
+                <!-- زر القارئ ذهبي -->
+                <Button
+                    android:id="@+id/btnTTS"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:backgroundTint="#FFB300"
+                    android:text="🔊"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:elevation="6dp" />
 
-    </RelativeLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>
