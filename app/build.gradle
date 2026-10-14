@@ -1,12 +1,15 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 34
+    namespace 'com.rgalmahdi.app'
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.rgalmahdi.app"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 21
+        targetSdk 34
         versionCode 11
         versionName "11.0-GOLD-BANNER"
     }
@@ -27,6 +30,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    // === بانر StartApp ثابت فوق + بيني - يظهر دائماً ===
+    // === StartApp بانر ثابت + بيني ===
     implementation 'com.startapp:inapp-sdk:4.11.0'
 }
