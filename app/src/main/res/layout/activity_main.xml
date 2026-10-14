@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#F5F5F5">
 
-    <!-- ===== بانر StartApp ثابت فوق - يظهر دائماً حتى لو المدونة ما اشتغلت ===== -->
+    <!-- بانر StartApp ثابت فوق - يظهر حتى لو المدونة ما اشتغلت -->
     <com.startapp.sdk.ads.banner.Banner
         android:id="@+id/startAppBanner"
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <!-- ===== أزرار برو ماكس الذهبية - تحت بعض - ملونة ===== -->
+            <!-- أزرار برو ماكس -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,6 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical">
 
-                <!-- زر المشاركة أخضر -->
                 <Button
                     android:id="@+id/btnShare"
                     android:layout_width="56dp"
@@ -46,10 +45,8 @@
                     android:backgroundTint="#2E7D32"
                     android:text="⤴"
                     android:textColor="#FFFFFF"
-                    android:textSize="22sp"
-                    android:elevation="6dp" />
+                    android:textSize="22sp" />
 
-                <!-- زر العين أزرق -->
                 <Button
                     android:id="@+id/btnEye"
                     android:layout_width="56dp"
@@ -58,10 +55,8 @@
                     android:backgroundTint="#0288D1"
                     android:text="👁"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:elevation="6dp" />
+                    android:textSize="20sp" />
 
-                <!-- زر القارئ ذهبي -->
                 <Button
                     android:id="@+id/btnTTS"
                     android:layout_width="56dp"
@@ -69,11 +64,9 @@
                     android:backgroundTint="#FFB300"
                     android:text="🔊"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:elevation="6dp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
-
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
