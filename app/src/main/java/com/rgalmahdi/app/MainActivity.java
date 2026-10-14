@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 String url = webView.getUrl() != null ? webView.getUrl() : SITE_URL;
                 android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(android.content.Intent.EXTRA_TEXT, "✨ رق المهدي ✨\n" + url);
+                intent.putExtra(android.content.Intent.EXTRA_TEXT, "✨ رق المهدي - رقيتك الشرعية ✨\n" + url);
                 startActivity(android.content.Intent.createChooser(intent, "مشاركة"));
             });
         });
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         if (webView != null && webView.canGoBack()) { webView.goBack(); return; }
         new AlertDialog.Builder(this)
             .setTitle("💎 رق المهدي برو ماكس")
-            .setMessage("هل تريد الخروج فعلاً؟\n")
+            .setMessage("هل تريد الخروج فعلاً؟\nلا تنسى ذكر الله ﷺ")
             .setPositiveButton("خروج 🚪", (d, w) -> showInterstitialThen(() -> finishAffinity()))
             .setNegativeButton("البقاء 📖", null)
             .show();
