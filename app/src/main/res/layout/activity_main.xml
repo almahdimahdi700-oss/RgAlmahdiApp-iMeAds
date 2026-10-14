@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFF8E1">
 
-    <!-- هذا لازم يظهر أحمر حتى لو ما في إعلان -->
+    <!-- البانر الذهبي الثابت فوق - 50dp -->
     <com.startapp.sdk.ads.banner.Banner
         android:id="@+id/startAppBanner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:minHeight="50dp"
-        android:background="#FF0000" />
+        android:background="#FFF8E1" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
@@ -26,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <!-- الأزرار الذهبية الثلاثة -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,9 +36,34 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical">
 
-                <Button android:id="@+id/btnShare" android:layout_width="56dp" android:layout_height="56dp" android:layout_marginBottom="12dp" android:backgroundTint="#2E7D32" android:text="⤴" android:textColor="#FFFFFF" android:textSize="22sp" />
-                <Button android:id="@+id/btnEye" android:layout_width="56dp" android:layout_height="56dp" android:layout_marginBottom="12dp" android:backgroundTint="#0288D1" android:text="👁" android:textColor="#FFFFFF" android:textSize="20sp" />
-                <Button android:id="@+id/btnTTS" android:layout_width="56dp" android:layout_height="56dp" android:backgroundTint="#FFB300" android:text="🔊" android:textColor="#000000" android:textSize="18sp" />
+                <Button
+                    android:id="@+id/btnShare"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#2E7D32"
+                    android:text="⤴"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp" />
+
+                <Button
+                    android:id="@+id/btnEye"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#0288D1"
+                    android:text="👁"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnTTS"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:backgroundTint="#FFB300"
+                    android:text="🔊"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </RelativeLayout>
