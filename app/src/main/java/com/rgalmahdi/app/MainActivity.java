@@ -33,29 +33,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // ===== 1. تهيئة StartApp - ID حقك =====
+        // تهيئة StartApp
         StartAppSDK.init(this, STARTAPP_ID, false);
-        StartAppSDK.setTestAdsEnabled(false); // إعلانات حقيقية = فلوس حقيقية
+        StartAppSDK.setTestAdsEnabled(false);
         StartAppAd.disableSplash();
-        
-        // إعلان بيني
         startAppAd = new StartAppAd(this);
         startAppAd.loadAd(AdPreferences.TYPE.INTERSTITIAL);
 
-        // ===== 2. بانر ثابت فوق - يظهر دائماً حتى لو المدونة ما اشتغلت =====
+        // بانر ثابت فوق - يظهر دائماً
         startAppBanner = findViewById(R.id.startAppBanner);
         startAppBanner.setBannerListener(new BannerListener() {
             @Override public void onReceiveAd(com.startapp.sdk.adsbase.View view) {}
             @Override public void onFailedToReceiveAd(com.startapp.sdk.adsbase.View view) {
-                // لو فشل، حاول مرة ثانية بعد 30 ثانية
                 view.postDelayed(() -> startAppBanner.loadAd(), 30000);
             }
             @Override public void onImpression(com.startapp.sdk.adsbase.View view) {}
             @Override public void onClick(com.startapp.sdk.adsbase.View view) {}
         });
-        startAppBanner.loadAd(); // حمل البانر فوراً
-        
-        // إعادة تحميل البانر كل 45 ثانية
+        startAppBanner.loadAd();
         startAppBanner.postDelayed(new Runnable() {
             @Override public void run() {
                 try { startAppBanner.loadAd(); } catch (Exception e) {}
@@ -63,31 +58,29 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 45000);
 
-        // ===== 3. WebView + iMeAds =====
+        // WebView + iMeAds
         webView = findViewById(R.id.webview);
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
-
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 swipeRefreshLayout.setRefreshing(false);
-                // حقن iMeAds - يحسب لك داخل الصفحة
                 view.evaluateJavascript("(function(){try{var s=document.createElement('script');s.src='https://www.imeads.com/ads.js';s.setAttribute('data-pub','" + IMEADS_PUB + "');s.setAttribute('data-no-close','true');document.body.appendChild(s);}catch(e){}})();", null);
             }
         });
         webView.loadUrl(SITE_URL);
         swipeRefreshLayout.setOnRefreshListener(() -> webView.reload());
 
-        // ===== 4. أزرار برو ماكس الذهبية =====
+        // أزرار برو ماكس + إعلانات بينية
         findViewById(R.id.btnShare).setOnClickListener(v -> {
             showInterstitialThen(() -> {
                 String url = webView.getUrl() != null ? webView.getUrl() : SITE_URL;
                 android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(android.content.Intent.EXTRA_TEXT, "✨ رق المهدي - رقيتك الشرعية ✨\n" + url + "\nحمل التطبيق الآن!");
-                startActivity(android.content.Intent.createChooser(intent, "مشاركة رق المهدي"));
+                intent.putExtra(android.content.Intent.EXTRA_TEXT, "✨ رق المهدي - رقيتك الشرعية ✨\n" + url);
+                startActivity(android.content.Intent.createChooser(intent, "مشاركة"));
             });
         });
 
@@ -106,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 webView.evaluateJavascript("(function(){try{return document.body.innerText.substring(0,3500)}catch(e){return ''}})();", value -> {
-                    String text = value.replaceAll("^\"|\"$", "").replace("\\n", " ").trim();
+                    String text = value.replaceAll("^\"|\"$", "").trim();
                     if (text.length() > 5) {
                         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "RqAlMahdi");
-                        Toast.makeText(this, "🔊 يقرأ الآن... اضغط مرة أخرى للإيقاف", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "🔊 يقرأ الآن...", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (Exception e) {}
@@ -120,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // دالة الإعلان البيني - تظهر الإعلان ثم تنفذ الحركة
     private void showInterstitialThen(Runnable action) {
         try {
             if (startAppAd != null) {
@@ -139,15 +131,9 @@ public class MainActivity extends AppCompatActivity {
         if (webView != null && webView.canGoBack()) { webView.goBack(); return; }
         new AlertDialog.Builder(this)
             .setTitle("💎 رق المهدي برو ماكس")
-            .setMessage("هل تريد الخروج فعلاً؟\nلا تنسى ذكر الله والصلاة على النبي ﷺ")
+            .setMessage("هل تريد الخروج فعلاً؟\nلا تنسى ذكر الله ﷺ")
             .setPositiveButton("خروج 🚪", (d, w) -> showInterstitialThen(() -> finishAffinity()))
             .setNegativeButton("البقاء 📖", null)
-            .setNeutralButton("مشاركة التطبيق", (d,w) -> {
-                android.content.Intent i = new android.content.Intent(android.content.Intent.ACTION_SEND);
-                i.setType("text/plain");
-                i.putExtra(android.content.Intent.EXTRA_TEXT, "حمل رق المهدي برو ماكس: https://rgalmahdi.blogspot.com/");
-                startActivity(i);
-            })
             .show();
     }
 
