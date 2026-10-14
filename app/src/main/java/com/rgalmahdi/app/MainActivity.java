@@ -13,8 +13,7 @@ import com.startapp.sdk.adsbase.StartAppAd;
 import com.startapp.sdk.adsbase.StartAppSDK;
 import com.startapp.sdk.adsbase.adlisteners.AdDisplayListener;
 import com.startapp.sdk.ads.banner.Banner;
-import com.startapp.sdk.ads.banner.BannerListener;
-import com.startapp.sdk.adsbase.model.AdPreferences;
+import com.startapp.sdk.adsbase.Ad;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,30 +32,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // تهيئة StartApp
+        // تهيئة StartApp 4.11.0
         StartAppSDK.init(this, STARTAPP_ID, false);
         StartAppSDK.setTestAdsEnabled(false);
         StartAppAd.disableSplash();
         startAppAd = new StartAppAd(this);
-        startAppAd.loadAd(AdPreferences.TYPE.INTERSTITIAL);
+        startAppAd.loadAd();
 
-        // بانر ثابت فوق - يظهر دائماً
+        // بانر ثابت فوق - يظهر دائماً حتى لو المدونة ما اشتغلت
         startAppBanner = findViewById(R.id.startAppBanner);
-        startAppBanner.setBannerListener(new BannerListener() {
-            @Override public void onReceiveAd(com.startapp.sdk.adsbase.View view) {}
-            @Override public void onFailedToReceiveAd(com.startapp.sdk.adsbase.View view) {
-                view.postDelayed(() -> startAppBanner.loadAd(), 30000);
-            }
-            @Override public void onImpression(com.startapp.sdk.adsbase.View view) {}
-            @Override public void onClick(com.startapp.sdk.adsbase.View view) {}
-        });
-        startAppBanner.loadAd();
-        startAppBanner.postDelayed(new Runnable() {
-            @Override public void run() {
-                try { startAppBanner.loadAd(); } catch (Exception e) {}
-                startAppBanner.postDelayed(this, 45000);
-            }
-        }, 45000);
+        if (startAppBanner != null) {
+            startAppBanner.loadAd();
+            startAppBanner.postDelayed(new Runnable() {
+                @Override public void run() {
+                    try { startAppBanner.loadAd(); } catch (Exception e) {}
+                    startAppBanner.postDelayed(this, 45000);
+                }
+            }, 45000);
+        }
 
         // WebView + iMeAds
         webView = findViewById(R.id.webview);
@@ -79,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 String url = webView.getUrl() != null ? webView.getUrl() : SITE_URL;
                 android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(android.content.Intent.EXTRA_TEXT, "✨ رق المهدي - رقيتك الشرعية ✨\n" + url);
+                intent.putExtra(android.content.Intent.EXTRA_TEXT, "✨ رق المهدي ✨\n" + url);
                 startActivity(android.content.Intent.createChooser(intent, "مشاركة"));
             });
         });
@@ -117,10 +110,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (startAppAd != null) {
                 startAppAd.showAd(new AdDisplayListener() {
-                    @Override public void adHidden(com.startapp.sdk.adsbase.Ad ad) { action.run(); startAppAd.loadAd(); }
-                    @Override public void adDisplayed(com.startapp.sdk.adsbase.Ad ad) {}
-                    @Override public void adClicked(com.startapp.sdk.adsbase.Ad ad) {}
-                    @Override public void adNotDisplayed(com.startapp.sdk.adsbase.Ad ad) { action.run(); startAppAd.loadAd(); }
+                    @Override public void adHidden(Ad ad) { action.run(); startAppAd.loadAd(); }
+                    @Override public void adDisplayed(Ad ad) {}
+                    @Override public void adClicked(Ad ad) {}
+                    @Override public void adNotDisplayed(Ad ad) { action.run(); startAppAd.loadAd(); }
                 });
             } else action.run();
         } catch (Exception e) { action.run(); }
@@ -131,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         if (webView != null && webView.canGoBack()) { webView.goBack(); return; }
         new AlertDialog.Builder(this)
             .setTitle("💎 رق المهدي برو ماكس")
-            .setMessage("هل تريد الخروج فعلاً؟\nلا تنسى ذكر الله ﷺ")
+            .setMessage("هل تريد الخروج فعلاً؟\n")
             .setPositiveButton("خروج 🚪", (d, w) -> showInterstitialThen(() -> finishAffinity()))
             .setNegativeButton("البقاء 📖", null)
             .show();
