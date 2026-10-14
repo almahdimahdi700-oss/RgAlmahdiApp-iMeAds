@@ -1,13 +1,15 @@
 package com.rgalmahdi.app;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import android.speech.tts.TextToSpeech;
 import java.util.Locale;
 import com.startapp.sdk.adsbase.StartAppAd;
 import com.startapp.sdk.adsbase.StartAppSDK;
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextToSpeech textToSpeech;
     private StartAppAd startAppAd;
     private Banner startAppBanner;
-    
+
     public static final String SITE_URL = "https://rgalmahdi.blogspot.com/";
     public static final String IMEADS_PUB = "pub_X_V2BG-WWEDsbgkBc8qHng";
     public static final String STARTAPP_ID = "209205885";
@@ -32,113 +34,103 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // تهيئة StartApp 4.11.0
+        // تهيئة StartApp - تشتغل حتى لو النت ضعيف
         StartAppSDK.init(this, STARTAPP_ID, false);
         StartAppSDK.setTestAdsEnabled(false);
         StartAppAd.disableSplash();
         startAppAd = new StartAppAd(this);
         startAppAd.loadAd();
 
-        // بانر ثابت فوق - يظهر دائماً حتى لو المدونة ما اشتغلت
+        // البانر الثابت الذهبي فوق - يظهر دائماً
         startAppBanner = findViewById(R.id.startAppBanner);
         if (startAppBanner != null) {
             startAppBanner.loadAd();
             startAppBanner.postDelayed(new Runnable() {
                 @Override public void run() {
-                    try { startAppBanner.loadAd(); } catch (Exception e) {}
-                    startAppBanner.postDelayed(this, 45000);
+                    try { if (startAppBanner != null) startAppBanner.loadAd(); } catch (Exception e) {}
+                    if (startAppBanner != null) startAppBanner.postDelayed(this, 45000);
                 }
             }, 45000);
         }
 
-        // WebView + iMeAds
+        // WebView + iMeAds الذهبي
         webView = findViewById(R.id.webview);
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setAllowContentAccess(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
                 swipeRefreshLayout.setRefreshing(false);
-                view.evaluateJavascript("(function(){try{var s=document.createElement('script');s.src='https://www.imeads.com/ads.js';s.setAttribute('data-pub','" + IMEADS_PUB + "');s.setAttribute('data-no-close','true');document.body.appendChild(s);}catch(e){}})();", null);
+                String js = "(function(){try{var s=document.createElement('script');s.src='https://www.imeads.com/ads.js';s.setAttribute('data-pub','" + IMEADS_PUB + "');s.setAttribute('data-no-close','true');document.body.appendChild(s);}catch(e){}})();";
+                view.evaluateJavascript(js, null);
+                try { if (startAppBanner != null) startAppBanner.loadAd(); } catch (Exception e) {}
             }
         });
         webView.loadUrl(SITE_URL);
-        swipeRefreshLayout.setOnRefreshListener(() -> webView.reload());
+        swipeRefreshLayout.setOnRefreshListener(() -> { if (webView != null) webView.reload(); });
 
-        // أزرار برو ماكس + إعلانات بينية
+        // زر المشاركة الذهبي + إعلان بيني
         findViewById(R.id.btnShare).setOnClickListener(v -> {
             showInterstitialThen(() -> {
-                String url = webView.getUrl() != null ? webView.getUrl() : SITE_URL;
-                android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(android.content.Intent.EXTRA_TEXT, "✨ رق المهدي - رقيتك الشرعية ✨\n" + url);
-                startActivity(android.content.Intent.createChooser(intent, "مشاركة"));
+                try {
+                    String shareUrl = webView.getUrl(); if (shareUrl == null) shareUrl = SITE_URL;
+                    Intent intent = new Intent(Intent.ACTION_SEND); intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, "✨ رق المهدي ✨\n" + shareUrl);
+                    startActivity(Intent.createChooser(intent, "مشاركة رق المهدي 📖"));
+                } catch (Exception e) {}
             });
         });
 
+        // زر راحة العين الذهبي + إعلان بيني
         findViewById(R.id.btnEye).setOnClickListener(v -> {
             showInterstitialThen(() -> {
-                webView.evaluateJavascript("javascript:try{var f=document.body.style.filter;document.body.style.filter=f.includes('1.6')?'':'brightness(1.6) sepia(0.2)'}catch(e){}", null);
-                Toast.makeText(this, "👁️ وضع راحة العين", Toast.LENGTH_SHORT).show();
+                try {
+                    String eyeJs = "javascript:try{var f=document.body.style.filter;if(f.includes('brightness')){document.body.style.filter='';}else{document.body.style.filter='brightness(1.6) sepia(0.2) contrast(0.9)';}}catch(e){}";
+                    webView.evaluateJavascript(eyeJs, null);
+                    Toast.makeText(this, "👁️ تم تغيير وضع راحة العين", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {}
             });
         });
 
+        // زر القارئ الصوتي الذهبي + إعلان بيني
         findViewById(R.id.btnTTS).setOnClickListener(v -> {
-            try {
-                if (textToSpeech != null && textToSpeech.isSpeaking()) {
-                    textToSpeech.stop();
-                    Toast.makeText(this, "⏹️ توقف", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                webView.evaluateJavascript("(function(){try{return document.body.innerText.substring(0,3500)}catch(e){return ''}})();", value -> {
-                    String text = value.replaceAll("^\"|\"$", "").trim();
-                    if (text.length() > 5) {
-                        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "RqAlMahdi");
-                        Toast.makeText(this, "🔊 يقرأ الآن...", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (Exception e) {}
+            showInterstitialThen(() -> {
+                try {
+                    if (textToSpeech != null && textToSpeech.isSpeaking()) { textToSpeech.stop(); Toast.makeText(this, "⏹️ تم إيقاف القراءة", Toast.LENGTH_SHORT).show(); return; }
+                    webView.evaluateJavascript("(function(){try{return document.body.innerText.substring(0,3800);}catch(e){return '';}})();", value -> {
+                        try {
+                            String text = value.replaceAll("^\"|\"$", "").replace("\\n", " ").trim().replace("\\", "").trim();
+                            if (text.length() > 10) { if (textToSpeech != null) { textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "RqAlMahdi_GOLD"); Toast.makeText(this, "🔊 يقرأ الآن...", Toast.LENGTH_LONG).show(); } }
+                        } catch (Exception e) {}
+                    });
+                } catch (Exception e) {}
+            });
         });
 
-        textToSpeech = new TextToSpeech(this, status -> {
-            if (status == TextToSpeech.SUCCESS) textToSpeech.setLanguage(new Locale("ar"));
-        });
+        textToSpeech = new TextToSpeech(this, status -> { if (status == TextToSpeech.SUCCESS) { try { textToSpeech.setLanguage(new Locale("ar")); textToSpeech.setSpeechRate(0.9f); } catch (Exception e) {} } });
     }
 
     private void showInterstitialThen(Runnable action) {
         try {
             if (startAppAd != null) {
                 startAppAd.showAd(new AdDisplayListener() {
-                    @Override public void adHidden(Ad ad) { action.run(); startAppAd.loadAd(); }
+                    @Override public void adHidden(Ad ad) { action.run(); try { startAppAd.loadAd(); } catch (Exception e) {} }
                     @Override public void adDisplayed(Ad ad) {}
                     @Override public void adClicked(Ad ad) {}
-                    @Override public void adNotDisplayed(Ad ad) { action.run(); startAppAd.loadAd(); }
+                    @Override public void adNotDisplayed(Ad ad) { action.run(); try { startAppAd.loadAd(); } catch (Exception e) {} }
                 });
             } else action.run();
-        } catch (Exception e) { action.run(); }
+        } catch (Exception e) { action.run(); try { if (startAppAd != null) startAppAd.loadAd(); } catch (Exception ex) {} }
     }
 
-    @Override
-    public void onBackPressed() {
+    @Override public void onBackPressed() {
         if (webView != null && webView.canGoBack()) { webView.goBack(); return; }
-        new AlertDialog.Builder(this)
-            .setTitle("💎 رق المهدي برو ماكس")
-            .setMessage("هل تريد الخروج فعلاً؟\nلا تنسى ذكر الله ﷺ")
-            .setPositiveButton("خروج 🚪", (d, w) -> showInterstitialThen(() -> finishAffinity()))
-            .setNegativeButton("البقاء 📖", null)
-            .show();
+        new AlertDialog.Builder(this).setTitle("💎 رق المهدي برو ماكس الذهبي").setMessage("هل تريد الخروج فعلاً؟\n\nلا تنسى الأذكار :\nرق المهدي").setPositiveButton("خروج 🚪", (d, w) -> showInterstitialThen(() -> finishAffinity())).setNegativeButton("البقاء 📖", (d, w) -> d.dismiss()).setCancelable(false).show();
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        try { if (startAppBanner != null) startAppBanner.loadAd(); } catch (Exception e) {}
-    }
-
-    @Override
-    protected void onDestroy() {
-        try { if (textToSpeech != null) { textToSpeech.stop(); textToSpeech.shutdown(); } } catch (Exception e) {}
-        super.onDestroy();
-    }
+    @Override protected void onResume() { super.onResume(); try { if (startAppBanner != null) startAppBanner.loadAd(); } catch (Exception e) {} }
+    @Override protected void onDestroy() { try { if (textToSpeech != null) { textToSpeech.stop(); textToSpeech.shutdown(); } } catch (Exception e) {} super.onDestroy(); }
 }
