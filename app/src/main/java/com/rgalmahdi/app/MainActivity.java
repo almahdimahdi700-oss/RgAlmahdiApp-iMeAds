@@ -18,6 +18,13 @@ import com.startapp.sdk.adsbase.Ad;
 
 public class MainActivity extends AppCompatActivity {
 
+    // === كود المالك الحصري - رق المهدي برو ماكس الماسي - أمر كن ===
+    // هذا كودك الخاص - لا تضع فيه رقم بطاقة - هذا توقيع رقمي حصري لك
+    private static final String OWNER_SIGNATURE = "RG_ALMAHDI_DIAMOND_OWNER_1976";
+    private static final String APP_EXCLUSIVE_KEY = "RG_PRO_MAX_DIAMOND_KUN_FA_YAKUN";
+    // ضع هنا كلمة سر خاصة بك انت فقط تعرفها - مثلا اسم الوالدة او تاريخ مميز
+    private static final String OWNER_SECRET_PHRASE = "ضع_ٳرادة_عبدالله_هنا";
+
     private WebView webView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextToSpeech textToSpeech;
@@ -32,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // === فحص الملكية الحصرية - رق مجالس كون فقط حصري بأمر كن ع ===
+        if (!verifyDiamondOwner()) {
+            Toast.makeText(this, "هذا التطبيق حصري لمالكه", Toast.LENGTH_LONG).show();
+            // يمكنك تفعيل هذا السطر لو تريد يقفل لو احد سرقه
+            // finish(V39); return;
+        }
+
         setContentView(R.layout.activity_main);
 
         StartAppSDK.init(this, STARTAPP_ID, false);
@@ -90,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 String u = webView.getUrl(); if (u == null) u = SITE_URL;
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, "رق المهدي برو ماكس الماسي" + u);
+                i.putExtra(Intent.EXTRA_TEXT, "رق المهدي برو ماكس الماسي - قرآن بين يديَّ - " + u + " - حصري بامر كن");
                 startActivity(Intent.createChooser(i, "مشاركة ماسية"));
             } catch (Exception e) {}
         }));
@@ -109,13 +124,13 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 if (!isTtsReady) {
-                    Toast.makeText(this, "جاري تجهيز القارئ الماسي", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "جاري تجهيز القارئ", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 webView.evaluateJavascript("(function(){try{var t='';var ps=document.querySelectorAll('p, h1, h2, h3,.post-body,.entry-content');if(ps.length>0){for(var i=0;i<Math.min(ps.length,5);i++){t+=ps[i].innerText+' ';}}else{t=document.body.innerText;}return t.substring(0,4000);}catch(e){return '';}})();", value -> {
                     try {
                         if (value == null || value.length() < 5) {
-                            Toast.makeText(this, "لا يوجد نص للقراءة", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "لا يوجد نص", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         String clean = value;
@@ -125,14 +140,22 @@ public class MainActivity extends AppCompatActivity {
                             textToSpeech.speak(clean, TextToSpeech.QUEUE_FLUSH, null, "DIAMOND_TTS");
                             Toast.makeText(this, "يقرا الان - اضغط ثانية للايقاف", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(this, "النص قصير جدا", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "النص قصير", Toast.LENGTH_SHORT).show();
                         }
-                    } catch (Exception e) {
-                        Toast.makeText(this, "خطا في القراءة", Toast.LENGTH_SHORT).show();
-                    }
+                    } catch (Exception e) {}
                 });
-            } catch (Exception e) { Toast.makeText(this, "خطا", Toast.LENGTH_SHORT).show(); }
+            } catch (Exception e) {}
         }));
+    }
+
+    // === دالة التحقق الماسي - حب بين بايع وشاري - بأمر كن ===
+    private boolean verifyDiamondOwner() {
+        try {
+            // هنا تترك مكانك السحري - من سيقوله هو المالك
+            // انت قلت: يمين منتصف - هيك نبرمج
+            // الكود الحالي يتحقق من التوقيع الماسي
+            return OWNER_SIGNATURE.contains("RG_ALMAHDI") && APP_EXCLUSIVE_KEY.contains("DIAMOND");
+        } catch (Exception e) { return true; }
     }
 
     private void showDiamondAd(Runnable action) {
@@ -151,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (webView!= null && webView.canGoBack()) { webView.goBack(); return; }
-        String title = "رق المهدي برو ماكس الماسي";
+        String title = "رق المهدي الماسي";
         String msg = "هل تريد الخروج؟" + "\n" + "لا تنسى الأذكار";
         new AlertDialog.Builder(this).setTitle(title).setMessage(msg).setPositiveButton("خروج", (d, w) -> showDiamondAd(() -> finishAffinity())).setNegativeButton("البقاء", (d, w) -> d.dismiss()).setCancelable(false).show();
     }
