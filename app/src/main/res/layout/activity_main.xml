@@ -18,88 +18,52 @@
         android:layout_height="match_parent"
         android:layout_below="@id/startAppBanner"
         android:layout_above="@id/bottomBar">
-
-        <WebView
-            android:id="@+id/webview"
+        <WebView android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="76dp"
         android:layout_alignParentBottom="true"
         android:background="#FFFFFF"
         android:orientation="horizontal"
-        android:weightSum="3"
         android:padding="6dp"
         android:elevation="12dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="#FFB300"
-            app:strokeColor="#B8860B"
-            app:strokeWidth="1.5dp"
-            app:cardElevation="6dp">
-
-            <ImageButton
-                android:id="@+id/btnShare"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:layout_margin="5dp"
+            app:cardCornerRadius="18dp" app:cardBackgroundColor="#FFB300"
+            app:strokeColor="#B8860B" app:strokeWidth="1dp" app:cardElevation="8dp">
+            <ImageButton android:id="@+id/btnShare"
+                android:layout_width="match_parent" android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
-                android:src="@android:drawable/ic_menu_share"
-                android:tint="#FFFFFF"
-                android:scaleType="center" />
+                android:src="@android:drawable/ic_menu_share" android:tint="#FFFFFF" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="#26A69A"
-            app:strokeColor="#00796B"
-            app:strokeWidth="1.5dp"
-            app:cardElevation="6dp">
-
-            <ImageButton
-                android:id="@+id/btnEye"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:layout_margin="5dp"
+            app:cardCornerRadius="18dp" app:cardBackgroundColor="#26A69A"
+            app:strokeColor="#00796B" app:strokeWidth="1dp" app:cardElevation="8dp">
+            <ImageButton android:id="@+id/btnEye"
+                android:layout_width="match_parent" android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
-                android:src="@android:drawable/ic_menu_view"
-                android:tint="#FFFFFF"
-                android:scaleType="center" />
+                android:src="@android:drawable/ic_menu_view" android:tint="#FFFFFF" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="#7C4DFF"
-            app:strokeColor="#512DA8"
-            app:strokeWidth="1.5dp"
-            app:cardElevation="6dp">
-
-            <ImageButton
-                android:id="@+id/btnTTS"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:layout_margin="5dp"
+            app:cardCornerRadius="18dp" app:cardBackgroundColor="#7C4DFF"
+            app:strokeColor="#512DA8" app:strokeWidth="1dp" app:cardElevation="8dp">
+            <ImageButton android:id="@+id/btnTTS"
+                android:layout_width="match_parent" android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
-                android:src="@android:drawable/ic_btn_speak_now"
-                android:tint="#FFFFFF"
-                android:scaleType="center" />
+                android:src="@android:drawable/ic_btn_speak_now" android:tint="#FFFFFF" />
         </com.google.android.material.card.MaterialCardView>
-
     </LinearLayout>
-
 </RelativeLayout>
