@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#FFF8E1">
 
-    <!-- بانر StartApp الماسي الذهبي - بدون أحمر نهائياً -->
+    <!-- بانر ماسي ذهبي بدون أحمر -->
     <com.startapp.sdk.ads.banner.Banner
         android:id="@+id/startAppBanner"
         android:layout_width="match_parent"
@@ -27,43 +27,86 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- شريط الأزرار الماسي الخماسي السعيد -->
+    <!-- الشريط الخماسي السعيد الماسي بألوان سحرية مميزة -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="72dp"
         android:layout_alignParentBottom="true"
-        android:background="#FFF8E1"
+        android:background="#FFFFFF"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:elevation="8dp">
+        android:padding="6dp"
+        android:elevation="12dp">
 
-        <ImageButton
-            android:id="@+id/btnShare"
+        <!-- زر المشاركة - ذهبي ماسي متوهج -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_share"
-            android:tint="#B8860B" />
+            android:layout_margin="4dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#FFB300"
+            app:strokeColor="#B8860B"
+            app:strokeWidth="1.5dp"
+            app:cardElevation="6dp">
 
-        <ImageButton
-            android:id="@+id/btnEye"
+            <ImageButton
+                android:id="@+id/btnShare"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:src="@android:drawable/ic_menu_share"
+                android:tint="#FFFFFF"
+                android:scaleType="center"
+                android:contentDescription="مشاركة" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- زر راحة العين - زمردي سحري -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_view"
-            android:tint="#B8860B" />
+            android:layout_margin="4dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#26A69A"
+            app:strokeColor="#00796B"
+            app:strokeWidth="1.5dp"
+            app:cardElevation="6dp">
 
-        <ImageButton
-            android:id="@+id/btnTTS"
+            <ImageButton
+                android:id="@+id/btnEye"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:src="@android:drawable/ic_menu_view"
+                android:tint="#FFFFFF"
+                android:scaleType="center"
+                android:contentDescription="راحة العين" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- زر القارئ - بنفسجي ملكي ماسي -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_btn_speak_now"
-            android:tint="#B8860B" />
+            android:layout_margin="4dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#7C4DFF"
+            app:strokeColor="#512DA8"
+            app:strokeWidth="1.5dp"
+            app:cardElevation="6dp">
+
+            <ImageButton
+                android:id="@+id/btnTTS"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:src="@android:drawable/ic_btn_speak_now"
+                android:tint="#FFFFFF"
+                android:scaleType="center"
+                android:contentDescription="القارئ" />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
