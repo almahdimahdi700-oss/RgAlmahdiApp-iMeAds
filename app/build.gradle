@@ -10,8 +10,11 @@ android {
         applicationId "com.rgalmahdi.app"
         minSdk 21
         targetSdk 34
-        versionCode 11
-        versionName "11.0-GOLD-BANNER"
+        versionCode 8
+        versionName "8.0 GOLD DIAMOND PRO MAX"
+
+        // هذا يصلح مشكلة منتجات غير مطابقة
+        manifestPlaceholders = [startappAppId: "209205885"]
     }
 
     buildTypes {
@@ -30,5 +33,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'com.startapp:inapp-sdk:4.11.0'
+    implementation 'androidx.webkit:webkit:1.9.0'
+    
+    // === Start.io الذهبي الماسي الجديد 5.3.1 - يحل مشكلة غير محدد ===
+    implementation 'com.startapp:inapp-sdk:5.3.1'
 }
