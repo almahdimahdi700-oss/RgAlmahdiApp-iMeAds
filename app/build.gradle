@@ -1,4 +1,3 @@
-
 plugins { id 'com.android.application' }
 android {
     namespace 'com.rgalmahdi.app'
@@ -7,8 +6,8 @@ android {
         applicationId "com.rgalmahdi.app"
         minSdk 23
         targetSdk 34
-        versionCode 11
-        versionName "11.0 THURSDAY NIGHT DIAMOND"
+        versionCode 12
+        versionName "12.0 FINAL DIAMOND"
         manifestPlaceholders = [startappAppId: "209205885"]
     }
     buildTypes { release { minifyEnabled false } }
