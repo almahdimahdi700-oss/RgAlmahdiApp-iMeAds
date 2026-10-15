@@ -4,14 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF8E1">
-
     <com.startapp.sdk.ads.banner.Banner
         android:id="@+id/startAppBanner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="#FFF8E1" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
@@ -22,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
@@ -32,7 +29,6 @@
         android:orientation="horizontal"
         android:padding="6dp"
         android:elevation="12dp">
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp" android:layout_height="match_parent"
             android:layout_weight="1" android:layout_margin="5dp"
@@ -43,7 +39,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:src="@android:drawable/ic_menu_share" android:tint="#FFFFFF" />
         </com.google.android.material.card.MaterialCardView>
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp" android:layout_height="match_parent"
             android:layout_weight="1" android:layout_margin="5dp"
@@ -54,7 +49,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:src="@android:drawable/ic_menu_view" android:tint="#FFFFFF" />
         </com.google.android.material.card.MaterialCardView>
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp" android:layout_height="match_parent"
             android:layout_weight="1" android:layout_margin="5dp"
