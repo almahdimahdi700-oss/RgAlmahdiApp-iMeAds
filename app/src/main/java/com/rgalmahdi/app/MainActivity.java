@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         webView.loadUrl(SITE_URL);
         swipeRefreshLayout.setOnRefreshListener(() -> webView.reload());
 
-        // قارئ TTS ماسي خارق - يقرأ ويوقف فوري
         textToSpeech = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {
                 try {
@@ -91,48 +90,48 @@ public class MainActivity extends AppCompatActivity {
                 String u = webView.getUrl(); if (u == null) u = SITE_URL;
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, "💎✨ رق المهدي برو ماكس الماسي ✨💎\n📖 رق المهدي\n🔗 " + u);
-                startActivity(Intent.createChooser(i, "مشاركة ماسية 📖💎"));
+                i.putExtra(Intent.EXTRA_TEXT, "رق المهدي برو ماكس الماسي" + u);
+                startActivity(Intent.createChooser(i, "مشاركة ماسية"));
             } catch (Exception e) {}
         }));
 
         findViewById(R.id.btnEye).setOnClickListener(v -> showDiamondAd(() -> {
             String js = "javascript:try{var b=document.body;var f=b.style.filter||'';if(f.includes('brightness')){b.style.filter='';b.style.backgroundColor='';document.documentElement.style.backgroundColor='';}else{b.style.filter='brightness(1.6) sepia(0.12) contrast(0.96)';b.style.backgroundColor='#FFF8E1';document.documentElement.style.backgroundColor='#FFF8E1';}}catch(e){}";
             webView.evaluateJavascript(js, null);
-            Toast.makeText(this, "👁️💎 راحة عين ماسية", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "راحة عين ماسية", Toast.LENGTH_SHORT).show();
         }));
 
         findViewById(R.id.btnTTS).setOnClickListener(v -> showDiamondAd(() -> {
             try {
                 if (textToSpeech!= null && textToSpeech.isSpeaking()) {
                     textToSpeech.stop();
-                    Toast.makeText(this, "⏹️ تم إيقاف القراءة الماسية", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "تم ايقاف القراءة الماسية", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!isTtsReady) {
-                    Toast.makeText(this, "⏳ جاري تجهيز القارئ الماسي...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "جاري تجهيز القارئ الماسي", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 webView.evaluateJavascript("(function(){try{var t='';var ps=document.querySelectorAll('p, h1, h2, h3,.post-body,.entry-content');if(ps.length>0){for(var i=0;i<Math.min(ps.length,5);i++){t+=ps[i].innerText+' ';}}else{t=document.body.innerText;}return t.substring(0,4000);}catch(e){return '';}})();", value -> {
                     try {
                         if (value == null || value.length() < 5) {
-                            Toast.makeText(this, "📭 لا يوجد نص للقراءة", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "لا يوجد نص للقراءة", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         String clean = value;
                         if (clean.startsWith("\"") && clean.endsWith("\"")) clean = clean.substring(1, clean.length()-1);
-                        clean = clean.replace("\\n", " ").replace("\\r", " ").replace("\\\"", "\"").replace("\\t", " ").replace("\\u003C", "<").trim();
+                        clean = clean.replace("\\n", " ").replace("\\r", " ").replace("\\\"", "\"").replace("\\t", " ").trim();
                         if (clean.length() > 20) {
                             textToSpeech.speak(clean, TextToSpeech.QUEUE_FLUSH, null, "DIAMOND_TTS");
-                            Toast.makeText(this, "🔊💎 يقرأ الآن... اضغط ثانية للإيقاف", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, "يقرا الان - اضغط ثانية للايقاف", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(this, "📭 النص قصير جداً", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "النص قصير جدا", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
-                        Toast.makeText(this, "❌ خطأ في القراءة", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "خطا في القراءة", Toast.LENGTH_SHORT).show();
                     }
                 });
-            } catch (Exception e) { Toast.makeText(this, "❌ خطأ", Toast.LENGTH_SHORT).show(); }
+            } catch (Exception e) { Toast.makeText(this, "خطا", Toast.LENGTH_SHORT).show(); }
         }));
     }
 
@@ -149,10 +148,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) { action.run(); }
     }
 
-    @Override public void onBackPressed() {
+    @Override
+    public void onBackPressed() {
         if (webView!= null && webView.canGoBack()) { webView.goBack(); return; }
-        new AlertDialog.Builder(this).setTitle("💎 رق المهدي برو ماكس الماسي").setMessage("هل تريد الخروج؟\n\لاتنسى الأذكار").setPositiveButton("خروج 🚪💎", (d, w) -> showDiamondAd(() -> finishAffinity())).setNegativeButton("البقاء 📖💎", (d, w) -> d.dismiss()).setCancelable(false).show();
+        String title = "رق المهدي برو ماكس الماسي";
+        String msg = "هل تريد الخروج؟" + "\n" + "لا تنسى الأذكار";
+        new AlertDialog.Builder(this).setTitle(title).setMessage(msg).setPositiveButton("خروج", (d, w) -> showDiamondAd(() -> finishAffinity())).setNegativeButton("البقاء", (d, w) -> d.dismiss()).setCancelable(false).show();
     }
+
     @Override protected void onResume() { super.onResume(); try { if (startAppBanner!= null) startAppBanner.loadAd(); } catch (Exception e) {} }
     @Override protected void onDestroy() { try { if (textToSpeech!= null) { textToSpeech.stop(); textToSpeech.shutdown(); } } catch (Exception e) {} super.onDestroy(); }
 }
