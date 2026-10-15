@@ -8,12 +8,11 @@ android {
 
     defaultConfig {
         applicationId "com.rgalmahdi.app"
-        minSdk 21
+        minSdk 23
         targetSdk 34
-        versionCode 8
-        versionName "8.0 GOLD DIAMOND PRO MAX"
+        versionCode 9
+        versionName "9.0 DIAMOND EXCLUSIVE PRO MAX"
 
-        // هذا يصلح مشكلة منتجات غير مطابقة
         manifestPlaceholders = [startappAppId: "209205885"]
     }
 
@@ -35,6 +34,6 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.webkit:webkit:1.9.0'
     
-    // === Start.io الذهبي الماسي الجديد 5.3.1 - يحل مشكلة غير محدد ===
+    // === Start.io الماسي 5.3.1 - يحتاج minSdk 23 ===
     implementation 'com.startapp:inapp-sdk:5.3.1'
 }
