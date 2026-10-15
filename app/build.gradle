@@ -10,9 +10,8 @@ android {
         applicationId "com.rgalmahdi.app"
         minSdk 23
         targetSdk 34
-        versionCode 9
-        versionName "9.0 DIAMOND EXCLUSIVE PRO MAX"
-
+        versionCode 10
+        versionName "10.0 DIAMOND MAGIC PRO MAX"
         manifestPlaceholders = [startappAppId: "209205885"]
     }
 
@@ -33,7 +32,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.webkit:webkit:1.9.0'
-    
-    // === Start.io الماسي 5.3.1 - يحتاج minSdk 23 ===
     implementation 'com.startapp:inapp-sdk:5.3.1'
 }
